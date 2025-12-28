@@ -1,9 +1,9 @@
 :root {
-  --bg: #efe7c8;
-  --sidebar: #e8e0bf;
-  --sidebar2: #e3dab5;
-  --text: #4b4b4b;
-  --muted: #9a9a9a;
+  --bg: #f2ebc8;
+  --sidebar: #e6dfbd;
+  --sidebar2: #dfd5ae;
+  --text: #4a4a3f;
+  --muted: #8f8b7a;
   --accent: #8b8b2c;
   --line: rgba(0, 0, 0, 0.08);
   --pink: #e43aa0;
@@ -17,77 +17,89 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
 }
 
 .window {
   height: 100%;
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: 330px 1fr;
   background: var(--bg);
 }
 
 .sidebar {
-  background: linear-gradient(#e9e1c4, #e3dab8);
+  background: linear-gradient(#e9e1c4, #e1d7b2);
   border-right: 1px solid var(--line);
   overflow: hidden;
 }
 
 .sidebarTop {
-  height: 58px;
-  padding: 10px 12px 0 12px;
+  height: 34px;
+  padding: 4px 8px 4px 62px;
   border-bottom: 1px solid var(--line);
+  -webkit-app-region: drag;
 }
-
-.appTitle {
+.sidebarTopRow {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 0, 0, 0.04);
-  border-radius: 6px;
-  padding: 8px 10px;
+  justify-content: space-between;
+}
+
+.appTitle {
+  gap: 8px;
+  padding: 3px 6px;
+  flex: 1;
+  min-width: 0;
+  -webkit-app-region: no-drag;
 }
 .horseIcon {
-  font-size: 16px;
-  opacity: 0.9;
+  font-size: 12px;
+  opacity: 0.85;
 }
 .appName {
   font-weight: 600;
   color: #3d3d3d;
+  font-size: 11px;
 }
 .appSub {
   margin-left: 6px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 9px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
 
 .tree {
-  height: calc(100% - 58px);
+  height: calc(100% - 34px);
   overflow: auto;
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .row {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 28px;
+  height: 24px;
   color: #5a5a5a;
-  font-size: 13px;
+  font-size: 12px;
   cursor: default;
   user-select: none;
 }
 .row:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.035);
 }
 .section {
   margin-top: 10px;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.06em;
   color: #8a8a8a;
   font-weight: 700;
@@ -95,31 +107,56 @@ body,
 .section:hover {
   background: transparent;
 }
+.section .fav {
+  opacity: 0;
+  border-color: transparent;
+  background: transparent;
+}
 
 .caret {
-  width: 14px;
+  width: 12px;
   display: inline-block;
   transform: translateY(-1px);
   color: #8a8a8a;
 }
-.caret.open {
-}
 .caretSpacer {
-  width: 14px;
+  width: 12px;
   display: inline-block;
 }
 
 .fav {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 3px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  background: rgba(255, 255, 255, 0.25);
-  color: #5c5c5c;
+  position: relative;
+  font-size: 9px;
+  background: rgba(255, 255, 255, 0.4);
+  color: #6f6a57;
+  text-transform: uppercase;
+}
+.fav img {
+  position: absolute;
+  inset: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border-radius: 3px;
+  object-fit: cover;
+}
+.favLetter {
+  position: relative;
+  z-index: 1;
+  opacity: 0.75;
+}
+.fav.hasImg .favLetter {
+  opacity: 0;
+}
+.fav.favDim {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(0, 0, 0, 0.35);
 }
 .title {
   flex: 0 1 auto;
@@ -129,9 +166,9 @@ body,
 }
 .sub {
   margin-left: auto;
-  color: #b1b1b1;
-  font-size: 12px;
-  padding-right: 10px;
+  color: #b6b1a0;
+  font-size: 10px;
+  padding-right: 6px;
 }
 
 .content {
@@ -139,51 +176,6 @@ body,
   flex-direction: column;
   min-width: 0;
   background: var(--bg);
-}
-
-.topbar {
-  height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--line);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.horseIconSm {
-  font-size: 14px;
-  opacity: 0.85;
-}
-.brandName {
-  font-weight: 600;
-  color: #3b3b3b;
-}
-.brandSub {
-  color: var(--muted);
-  font-size: 12px;
-  margin-left: 8px;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.actions button {
-  border: none;
-  background: transparent;
-  color: #5b5b5b;
-  font-weight: 600;
-  cursor: pointer;
-}
-.actions .buy {
-  color: var(--pink);
-  font-weight: 800;
 }
 .webwrap {
   flex: 1;
@@ -195,4 +187,106 @@ body,
   height: 100%;
   border: none;
   background: #fff;
+}
+
+.row.active {
+  background: rgba(0, 0, 0, 0.06);
+}
+.row.active .title {
+  color: #3f3f35;
+  font-weight: 600;
+}
+
+.iconBtn {
+  width: 20px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: #8f8b7a;
+  -webkit-app-region: no-drag;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.iconBtn:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+  color: #6f6b5f;
+}
+.iconBtn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.closeBtn {
+  margin-left: 6px;
+  margin-right: 8px;
+  border: none;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  padding: 0;
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.closeBtn:hover {
+  color: rgba(0, 0, 0, 0.65);
+}
+.closeBtn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.addr {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+}
+.addr input {
+  width: min(820px, 100%);
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.35);
+  padding: 0 10px;
+  outline: none;
+}
+
+/* top nav buttons */
+.navBtns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.navBtn {
+  width: 34px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* per-tab webviews (keep all mounted) */
+.webviewHidden {
+  display: none;
+}
+.webviewActive {
+  display: block;
+}
+
+/* drag hint */
+.row[draggable="true"] {
+  cursor: grab;
+}
+.row[draggable="true"]:active {
+  cursor: grabbing;
 }
